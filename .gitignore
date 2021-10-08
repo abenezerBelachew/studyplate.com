@@ -1,0 +1,15 @@
+*.pyc
+*.log
+.env
+.env.dev
+.env.prod
+.env.staging
+.env.staging.proxy-companion
+.env.prod.proxy-companion
+courseData.db
+env/
+ENV/
+media/
+static/
+db.sqlite3
+__pycache__

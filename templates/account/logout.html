@@ -1,0 +1,33 @@
+{% extends '_registration_base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Log out of StudyPlate? {% endblock title %}
+
+
+{% block content %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            
+           
+        <button class="btn btn-primary" type="submit">Log Out</button>
+    </form>
+{% endblock content %}
+
+{% block footer %}
+<a href="{% url 'account:user_dashboard' %}">Go back to dashboard</a>
+
+{% endblock footer %}
+
+
+{% block card_title %}
+Log Out of StudyPlate?
+{% endblock card_title %}
+
+
+
+
+
+
+

@@ -1,0 +1,28 @@
+{% extends '_registration_base.html' %}
+
+{% load i18n %}
+
+{% block title %}Verify Your Email address{% endblock title %}
+
+
+{% block content %}
+
+       {% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}
+{% endblock content %}
+
+{% block footer %}
+<a href="{% url 'account_login' %}">Login</a>
+
+{% endblock footer %}
+
+
+{% block card_title %}
+Verify Your E-mail Address
+{% endblock card_title %}
+
+
+
+
+
+
+

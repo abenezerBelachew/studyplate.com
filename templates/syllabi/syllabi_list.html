@@ -1,0 +1,201 @@
+{% extends '../_base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{ course.code }} | Syllabus
+{% endblock title %} 
+
+
+
+{% block content %}
+
+{% comment %} TODO: Include the header class from somewhere else instead of typing it twice {% endcomment %}
+{% comment %} TODO: Create its own templates {% endcomment %}
+
+<header class="card">
+    <!-- card-waves"> -->
+    <div class="card-body px-5 pt-5 pb-0">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-6">
+                {% with total_followers=course.followers.count followers=course.followers.all %}
+
+                <h1 class="text-primary">{{ course.code }}
+
+                    <a href="{% url 'course:course_follow' course.university.slug course.slug %}" class="ml-5" style="text-decoration:none;">                
+                {% if request.user not in followers %}
+                <button class="btn btn-outline-warning shadow-sm">JOIN</button></a> {% else %}
+                    <button class="btn btn-outline-danger shadow-sm">LEAVE</button></a>
+                    {% endif %}
+                    {% comment %} <span class="badge badge-white pointer" data-toggle="modal" data-target="#followersModal">{{ total_followers }} members</span> {% endcomment %}
+                </h1>
+
+                <p class="lead mb-4">
+                    {{ course.name }}
+                    <br />
+                    <span class="pointer" style="text-decoration:underline;" data-toggle="modal" data-target="#descriptionModal">Description</span>
+                </p>
+
+
+                <!-- Modal for description of course -->
+                <div class="modal fade" id="descriptionModal" tabindex="-1" role="dialog" aria-labelledby="descriptionModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Description</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                {{ course.description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal for followers of the course -->
+                {% comment %} <div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="followersModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Members of {{ course.name }}</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                {% for follower in followers %}
+                                    <a href="{{ follower.get_absolute_url }}">{{ follower }}</a>
+                                    <hr /> 
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+
+                {% comment %} <div class="modal fade" id="followersModal" tabindex="-1" role="dialog" aria-labelledby="followersModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="followersModalLabel">Members of {{ course.name }}</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            </div>
+                            <div class="modal-body">
+                                {% for follower in followers %}
+                                <a href="{{ follower.get_absolute_url }}">{{ follower }}</a>
+                                <hr /> {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div> {% endcomment %}
+
+
+                {% endwith %}
+            </div>
+
+            {% comment %}
+            <div class="col-lg-2"><img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Golden_triangle_%28math%29.svg/600px-Golden_triangle_%28math%29.svg.png" /></div> {% endcomment %}
+        </div>
+        <nav class="nav nav-borders">
+            <a class="nav-link" href="{{ course.get_absolute_url }}">Discussion</a>
+            {% if course.slug != 'uofa-general' or course.slug != 'uofa-random' %}
+            <a class="nav-link active ml-0" href="{% url 'syllabi:syllabus_list' course.university.slug course.slug %}">Syllabus</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+
+
+<div class="container mt-4">
+
+    <div class="col-xxl-8">
+
+
+        <div class="mb-4">
+
+
+            {% comment %} Start {% endcomment %}
+            <!-- Button trigger modal -->
+            <a href="{% url 'syllabi:syllabus_upload' course.university.slug course.slug %}">
+                {% comment %} data-toggle="modal" data-target="#uploadSyllabusModal"> {% endcomment %}
+                            <button class="btn-primary btn-lg mb-4">
+                            + Upload a Syllabus
+                            </button>
+                        </a>
+            <!-- Modal -->
+            <div class="modal fade" id="uploadSyllabusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Syllabus</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" enctype="multipart/form-data">
+                                {{ syllabus_form|crispy }}
+                                {% csrf_token %}
+                                
+                        </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">
+                                    Upload {{ course.code }} syllabus &nbsp;
+                            <i class="fas fa-file-upload"></i>
+                        </button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+{% comment %} End {% endcomment %}
+
+
+
+            
+
+            <div class="row">
+        <div class="col-xl-8">
+            <!-- User's Posts Card-->
+            <div class="card mb-4">
+                <div class="card-header">Syllabi</div>
+                <div class="card-body">
+                    {% for syllabus in syllabi %}
+
+                    <a href="{{ syllabus.get_absolute_url }}">
+                    {% if syllabus.title %} 
+                    {{ syllabus.title }} 
+                    {% else %}
+                    {{ syllabus.professor }} | {{ syllabus.term }}{{ syllabus.year }}</a>
+                    {% endif %}
+                    <hr />
+
+                    {% empty %}
+                    Uploading a syllabus helps people that want to take this course in
+                    the future. Help out by uploading a syllabus for a class you've
+                    taken.
+                    {% endfor %}
+                     
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+{% endblock content %} 

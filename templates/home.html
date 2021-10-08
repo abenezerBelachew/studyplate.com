@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Course Outline (Syllabus) and Discussions for University of Alberta Courses" />
+    <meta name="author" content="AB" />
+    <title>StudyPlate \ Course Outline (Syllabus) and Discussions for University of Alberta Courses</title>
+    <link href="{% static 'css/home_style.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="shortcut icon" type="image/png" href="{% static 'assets/img/book.png' %}" />
+    <script data-search-pseudo-elements defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" crossorigin="anonymous"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-177623518-1"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-177623518-1');
+    </script>
+
+</head>
+
+<body>
+    <div id="layoutDefault">
+        <div id="layoutDefault_content">
+            <main>
+                <nav class="navbar navbar-marketing navbar-expand-lg bg-white navbar-light">
+                    <div class="container">
+                        <a class="navbar-brand text-primary" href="{% url 'home' %}">StudyPlate.com</a>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ml-auto mr-lg-5">
+                                <li class="nav-item"><a class="nav-link" href="#">.</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <header class="page-header page-header-light bg-white">
+                    <div class="page-header-content">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-xl-8 col-lg-10 text-center" data-aos="fade">
+                                    <h1 class="page-header-title">Find/Upload Course Outlines and Discuss the Courses You Are Taking</h1>
+                                    <p class="page-header-text">
+                                        <!-- Search Courses -->
+                                        <div class="shadow rounded">
+                                            <form action="{% url 'course:search_results' 'university-alberta' %}" method="GET">
+
+                                                <div class="input-group input-group-joined input-group-joined-xl border-0">
+                                                    <input class="form-control" type="text" placeholder="Search Courses (eg. Econ323 or International Economics)" aria-label="Search" name="query" autofocus="">
+
+                                                    <div class="input-group-append">
+                                                        <button class="input-group-text" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                    </p>
+                                    <a href="{% url 'account_signup' %}" class="btn btn-primary btn-marketing rounded-pill lift lift-sm">Sign Up</a>
+                                    <a href="{% url 'account_login' %}" class="btn btn-link btn-marketing rounded-pill">Log In</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="svg-border-rounded text-light">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
+                    </div>
+                </header>
+                <section class="bg-light pb-10 pt-1">
+                    <div class="container">
+                        <div class="device-laptop text-gray-200 mt-n10" data-aos="fade-up">
+                            <svg class="device-container" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="83.911 298.53 426.962 243.838"><path d="M474.843 516.208V309.886c0-6.418-4.938-11.355-11.354-11.355H131.791c-6.417 0-11.354 4.938-11.354 11.355v206.816H83.911v13.326c4.938 7.896 31.098 12.34 40.969 12.34h345.024c10.366 0 36.526-4.936 40.969-12.34v-13.326h-36.03v-.494zM134.26 313.341h326.762v203.361H134.26V313.341z"></path></svg><img
+                                class="device-screenshot" src="{% static 'assets/img/preview.gif' %}" style="height:80%;" />
+                        </div>
+                    </div>
+                </section>
+
+
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{% static 'js/script.js' %}"></script>
+        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                disable: 'mobile',
+                duration: 600,
+                once: true
+            });
+        </script>
+</body>
+
+</html>

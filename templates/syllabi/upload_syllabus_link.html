@@ -1,0 +1,42 @@
+{% extends "../_base.html" %} {% load crispy_forms_tags %} 
+{% block title %}Upload Link{% endblock title %} {% block content %}
+
+<div class="container mt-4">
+    <div class="col-xxl-8">
+        <div class="card mb-4">
+            <div class="card-header border-bottom">
+                <ul class="nav nav-tabs card-header-tabs" id="cardTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="btn btn-transparent-dark btn-icon" 
+                href="{% url 'syllabi:syllabus_list' university.slug course.slug %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'syllabi:syllabus_upload' university.slug course.slug %}" aria-selected="false"><i class="fas fa-file-pdf"></i> Upload File</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="example-tab" href="#example" data-toggle="tab" role="tab" aria-controls="example" aria-selected="true"><i class="fas fa-link"></i> Upload Link</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="tab-content" id="cardTabContent">
+                    <div class="tab-pane fade show active" id="example" role="tabpanel" aria-labelledby="example-tab">
+                        <div class="card-body">
+                            <form method="POST">
+                                {{ syllabus_link_form|crispy }} {% csrf_token %}
+                                <p>
+                                    <button class="btn btn-primary" type="submit">
+                                Upload {{ course.code }} syllabus &nbsp;
+                                <i class="fas fa-file-upload"></i>
+                            </button></p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
