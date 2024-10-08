@@ -9,7 +9,7 @@ Django, Docker, Postgres, Nginx, AWS S3, DigitalOcean Droplets, AWS RDS, Bootstr
 
 
 ## Preview
-![App Screenshot](https://www.abenezerbelachew.com/images/projects/studyplate.gif)
+![App Screenshot](https://www.abenezer.ca/static/images/projects/studyplate.gif)
 
 
 ## UML
